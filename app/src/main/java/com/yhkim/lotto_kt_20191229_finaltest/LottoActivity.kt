@@ -168,6 +168,10 @@ class LottoActivity : BaseActivity() {
         else if( correctCount == 3) {
 //            5등 당첨 => 당첨금액 += 5천원
             totalWinMoney += 5000
+
+            usedMoney -= 5000//5등은 재구매
+
+
             fifthRankCount++
         }
         else {
