@@ -39,6 +39,26 @@ class LottoActivity : BaseActivity() {
 
 //      자동 구매 버튼 
         buyAutoLottoBtn.setOnClickListener {
+
+
+
+//------------ 초기화 --------------------------------
+            //사용금액 표기
+//        usedMoney += usedMoneyㄱㄱ
+        usedMoney = 0L//사용금액 초기화
+        totalWinMoney = 0L
+        useWinMoneyTxt.text = String.format("%,d원", usedMoney)
+        totalWinMoneyTxt.text = String.format("%,d원", totalWinMoney)
+
+        firstRankCount = 0
+        secondRankCount = 0
+        thirdRankCount = 0
+        forthRankCount = 0
+        fifthRankCount = 0
+        noRankCount = 0
+//--------------------------------------------------
+
+
 //            buyLottoLoop()
 
 
@@ -71,10 +91,6 @@ class LottoActivity : BaseActivity() {
             checkLottoRank()
         }
 
-        //사용금액 표기
-//        usedMoney += usedMoney
-//        useWinMoneyTxt.text = String.format("%,d원", usedMoney)
-        usedMoney = 0L//사용금액 초기화
     }
 
     fun buyLottoLoop_handler() {
