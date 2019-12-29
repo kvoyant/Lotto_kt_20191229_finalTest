@@ -80,6 +80,7 @@ class LottoActivity : BaseActivity() {
                 }
             }
             if(isSecondRank) {
+//            2등 당첨 => 당첨금액 += 5천만원
                 totalWinMoney += 50000000
             }
             else {
@@ -90,11 +91,11 @@ class LottoActivity : BaseActivity() {
 
         }
         else if( correctCount == 4) {
-//            3등 당첨 => 당첨금액 += 5만원
+//            4등 당첨 => 당첨금액 += 5만원
             totalWinMoney += 50000
         }
         else if( correctCount == 3) {
-//            4등 당첨 => 당첨금액 += 5천원
+//            5등 당첨 => 당첨금액 += 5천원
             totalWinMoney += 5000
         }
         else {
@@ -169,6 +170,7 @@ class LottoActivity : BaseActivity() {
 //            만약 중복 OK가 true라면 써도 된다
             if(isDupOk) {
                 bonusNumber = tempNum
+                bonuslottoNumTxt.text = bonusNumber.toString()
                 break //!!
             }
         }
