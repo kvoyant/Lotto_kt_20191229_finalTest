@@ -24,6 +24,13 @@ class LottoActivity : BaseActivity() {
         setValues()
     }
     override fun setupEvents() {
+
+//      자동 구매 버튼 
+        buyAutoLottoBtn.setOnClickListener {
+            buyLottoLoop()
+        }
+
+
         buyOneLottoBtn.setOnClickListener {
 //            6개의 숫자를 랜덤으로 생성 => 텍스트뷰 6개에 반영
             makeWinLottoNum()
@@ -31,6 +38,15 @@ class LottoActivity : BaseActivity() {
 //            몇등인지 판단하기
             checkLottoRank()
         }
+    }
+
+    fun buyLottoLoop() {
+        while(usedMoney < 10000000) {
+            makeWinLottoNum()
+            checkLottoRank()
+        }
+
+        usedMoney = 0L
     }
 
     fun checkLottoRank() {
@@ -50,7 +66,7 @@ class LottoActivity : BaseActivity() {
 //            각텍스트뷰에 적힌 숫자가 String => Int로 변환
             val num = myNumTxt.text.toString().toInt()
 
-            Log.d("적혀있는(내가 쓴) 숫자들", num.toString())
+            //Log.d("적혀있는(내가 쓴) 숫자들", num.toString())
 
             for ( winNum in winLottoNumArr) {
                 if(num == winNum) {
@@ -146,7 +162,7 @@ class LottoActivity : BaseActivity() {
             }
 
         }
-        Log.d("최종값",winLottoNumArr.toString())
+        //Log.d("최종값",winLottoNumArr.toString())
 
 //      내부값 정렬(오름차순)
         Collections.sort(winLottoNumArr)
@@ -180,7 +196,7 @@ class LottoActivity : BaseActivity() {
 
 //        번호 확인
 //        for(num in winLottoNumArr) {
-//            Log.d("당첨번호",num.toString())
+//            //Log.d("당첨번호",num.toString())
 //        }
 
         for(i in 0..5) {
