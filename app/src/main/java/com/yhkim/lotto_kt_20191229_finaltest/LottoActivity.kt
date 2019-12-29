@@ -1,8 +1,10 @@
 package com.yhkim.lotto_kt_20191229_finaltest
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lotto.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -17,6 +19,8 @@ class LottoActivity : BaseActivity() {
     val winLottoNumTextViewList = ArrayList<TextView>()
     val myLottoNumTextViewList = ArrayList<TextView>()
 
+    var mHandler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lotto)
@@ -27,7 +31,8 @@ class LottoActivity : BaseActivity() {
 
 //      자동 구매 버튼 
         buyAutoLottoBtn.setOnClickListener {
-            buyLottoLoop()
+//            buyLottoLoop()
+            buyLottoLoop_handler()
         }
 
 
@@ -46,8 +51,34 @@ class LottoActivity : BaseActivity() {
             checkLottoRank()
         }
 
-        usedMoney = 0L
+        //사용금액 표기
+//        usedMoney += usedMoney
+//        useWinMoneyTxt.text = String.format("%,d원", usedMoney)
+        usedMoney = 0L//사용금액 초기화
     }
+
+    fun buyLottoLoop_handler() {
+        mHandler.post(buyingLottoRunnable)
+    }
+
+
+    val buyingLottoRunnable = object : Runnable {
+        override fun run() {
+
+            if(usedMoney < 10000000) {
+                makeWinLottoNum()
+                checkLottoRank()
+                buyLottoLoop_handler()
+            }
+            else {
+                runOnUiThread {
+                    Toast.makeText(mContext, "로또 구매를 종료합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
 
     fun checkLottoRank() {
 
