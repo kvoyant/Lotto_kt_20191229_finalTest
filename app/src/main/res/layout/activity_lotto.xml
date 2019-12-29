@@ -21,35 +21,41 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/lottoNumTxt01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
             android:textSize="25sp" />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\?"
-            android:layout_marginLeft="15dp"
-            android:textSize="25sp" />
-        <TextView
+            android:id="@+id/lottoNumTxt02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
             android:layout_marginLeft="15dp"
             android:textSize="25sp" />
         <TextView
+            android:id="@+id/lottoNumTxt03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
             android:layout_marginLeft="15dp"
             android:textSize="25sp" />
         <TextView
+            android:id="@+id/lottoNumTxt04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
             android:layout_marginLeft="15dp"
             android:textSize="25sp" />
         <TextView
+            android:id="@+id/lottoNumTxt05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\?"
+            android:layout_marginLeft="15dp"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/lottoNumTxt06"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\?"
@@ -110,6 +116,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/buyOneLottoBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="로또 한장 구매하기"

@@ -1,6 +1,8 @@
 package com.yhkim.lotto_kt_20191229_finaltest
 
+import android.content.Intent
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,6 +12,11 @@ class MainActivity : BaseActivity() {
         setValues()
     }
     override fun setupEvents() {
+        lottoBtn.setOnClickListener {
+            val intent = Intent(mContext, LottoActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun setValues() {
