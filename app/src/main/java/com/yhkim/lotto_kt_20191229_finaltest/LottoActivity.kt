@@ -9,8 +9,12 @@ import kotlin.collections.ArrayList
 
 class LottoActivity : BaseActivity() {
 
+    var totalWinMoney = 0L //0을 Long 타입으로 => 그냥 0은 Int로 간주되어 값이 적음
+    var usedMoney = 0L //사용금액
+
     val winLottoNumArr = ArrayList<Int>()
     val winLottoNumTextViewList = ArrayList<TextView>()
+    val myLottoNumTextViewList = ArrayList<TextView>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +26,68 @@ class LottoActivity : BaseActivity() {
         buyOneLottoBtn.setOnClickListener {
 //            6개의 숫자를 랜덤으로 생성 => 텍스트뷰 6개에 반영
             makeWinLottoNum()
+
+//            몇등인지 판단하기
+            checkLottoRank()
         }
+    }
+
+    fun checkLottoRank() {
+
+//        등수판단?
+//        내가 가진 숫자들과 / 당첨번호를 하나하나 비교해서, 같은 숫자가 몇개인지? 세어야함.
+//        이개수에 따라서 등수를 판정.
+//        개수가 6개 : 1등 , 5개 : 3등 , 4개 : 4등, 3개 : 5등
+
+//        같은 숫자 카운팅
+        var correctCount = 0
+
+//        내가 가진 숫자를
+//        몇개의 숫자를 맞췄는지를 correctCount
+
+        for( myNumTxt in myLottoNumTextViewList) {
+//            각텍스트뷰에 적힌 숫자가 String => Int로 변환
+            val num = myNumTxt.text.toString().toInt()
+
+            Log.d("적혀있는(내가 쓴) 숫자들", num.toString())
+
+            for ( winNum in winLottoNumArr) {
+                if(num == winNum) {
+//                    당첨번호에 들어있다 ! 맞춘 개수 1 증가
+                    correctCount++
+                    break
+                }
+            }
+        }
+
+//        맞춘 개수에 따라 등수를 판정
+        if(correctCount == 6) {
+//            1등 당첨 => 당첨금액 += 50억
+            totalWinMoney += 5000000000
+        }
+        else if( correctCount == 5) {
+//            2등 당첨 => 당첨금액 += 150만원
+            totalWinMoney += 1500000
+        }
+        else if( correctCount == 4) {
+//            3등 당첨 => 당첨금액 += 5만원
+            totalWinMoney += 50000
+        }
+        else if( correctCount == 3) {
+//            4등 당첨 => 당첨금액 += 5천원
+            totalWinMoney += 5000
+        }
+        else {
+//            꽝! 당첨금액 변화 없음
+
+        }
+
+        totalWinMoneyTxt.text = totalWinMoney.toString()
+
+//        사용금액 : 한장살때마다 천원씩 증가
+       usedMoney += 1000
+        useWinMoneyTxt.text = usedMoney.toString()
+
     }
 
     fun makeWinLottoNum() {
@@ -75,11 +140,20 @@ class LottoActivity : BaseActivity() {
     }
 
     override fun setValues() {
+//        당첨 번호 텍스트뷰들을 배열로 담아둠
         winLottoNumTextViewList.add(lottoNumTxt01)
         winLottoNumTextViewList.add(lottoNumTxt02)
         winLottoNumTextViewList.add(lottoNumTxt03)
         winLottoNumTextViewList.add(lottoNumTxt04)
         winLottoNumTextViewList.add(lottoNumTxt05)
         winLottoNumTextViewList.add(lottoNumTxt06)
+
+//        내가 뽑은 번호 텍스트뷰들을 배열로 담아둠
+        myLottoNumTextViewList.add(myNumTxt01)
+        myLottoNumTextViewList.add(myNumTxt02)
+        myLottoNumTextViewList.add(myNumTxt03)
+        myLottoNumTextViewList.add(myNumTxt04)
+        myLottoNumTextViewList.add(myNumTxt05)
+        myLottoNumTextViewList.add(myNumTxt06)
     }
 }
